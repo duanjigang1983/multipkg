@@ -3,9 +3,11 @@ Name: %name%
 Version: %version%
 Release: %release%
 License: %license%
-Group: Local
+#Group: Local
+Group: %group%
 Provides: %name% %providelist%
-Packager: %whoami%
+#Packager: %whoami%
+Packager: %packager%
 BuildRoot: %buildroot%
 BuildArch: %arch%
 autoreqprov: no
@@ -17,7 +19,7 @@ Prefix: %prefix%
 %%endif
 
 %description
-%summary%
+%description%
 
 %%ifscript(pre.sh)
 %pre
@@ -42,4 +44,9 @@ Prefix: %prefix%
 %%ifscript(posttrans.sh)
 %posttrans
 %%posttrans.sh%%
+%%endif
+
+%%ifscript(verifyscript.sh)
+%verifyscript
+%%verifyscript.sh%%
 %%endif

@@ -1,0 +1,43 @@
+default:
+  name: tskeeper
+  version: '1.0.0'
+  release: '2'
+  packager: 'duanjigang'
+  summary: 'adding tskeeper as an example of multipkg'
+  group: 'cmesoft'
+  license: 'cmesoft'
+  description: 'cmd:cat source/desc.txt;hostname' 
+  arch: 'x86_64'
+  requires: ## tskeeper requires 'procps' and daemontools to be installed firstly
+    - procps
+    - daemontools
+  provides:  ### The package 'tskeeper' will provide something named as 'tskeeper-examples' and 'cmesoft-tskeeper'
+    - tskeeper-examples
+    - cmesoft-tskeeper
+  conflicts: ### sorry, i am conflicted with some rpms such as 'other-task-keeper' and 'all-task-keeper', 
+    - other-task-keeper
+    - all-task-keeper
+  obsoletes: ## when u want to install old-tskeeper with 'yum install old-tskeeper', you will get me -'tkeeper' ^_^
+    - old-tskeeper
+    - taskeeper
+  files:
+    - "/etc/test_conf1.conf":  ##just set attributes of this file, but not a configfile
+        group: "root"
+        perm:  "0666"
+        owner: "root"
+    - "/etc/test_conf2.conf": 
+        group: "root"
+        perm: "0777"
+        owner: "nobody"
+        config: "no" ## no matter what this value will be, 'config' tells multipkg 'please set me as a config file'
+    - "/etc/proclist.ini": 
+        group: "root"
+        perm: "0666"
+        owner: "root"
+        config: "yes" ## no matter what this value will be, 'config' tells multipkg 'please set me as a config file'
+    - "/var/doc/tskeeper": 
+        group: "root"
+        perm: "0444"
+        owner: "root"
+        doc: "xxoo"  ## yes, 'doc' is still not supported by multipkg, but you may add your own codes or clone my branch
+

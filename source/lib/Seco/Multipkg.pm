@@ -158,6 +158,7 @@ sub _init {
   $self->installdir($installdir);
 
   $self->setrelease;
+  $self->setdesc;###added by duanjigang@2017-01-01 to support self-defined descriptions
 
   $self->{_rules} = [ $self->get_file_rules ];
 }
@@ -179,7 +180,28 @@ sub setrelease {
   # build from source checkout
   $self->info->data->{release} = sprintf "0.%u", time()
     unless ( defined $self->info->data->{release} );
+  $self->info->data->{release} .= "." . $self->info->data->{os}
+    if (defined($self->info->data->{os}));
 }
+
+###added by jigang@2017-01-01 hangzhou --start
+sub setdesc {
+  my $self = shift;
+
+  if (defined($self->info->data->{description})){
+    my $wdir=`pwd`;
+    chdir  $self->info->directory;
+    my $desc =  $self->info->data->{description};
+    my $pos = index($desc, "cmd:");
+    if ( $pos eq 0 )
+    {
+        my $tcmd=substr($desc, 4);
+        $self->info->data->{description} = `$tcmd`;
+    }
+    chdir $wdir;
+ }
+}
+###added by jigang@2017-01-01 hangzhou --finish
 
 sub pkgverid {
   my $self = shift;
@@ -970,7 +992,13 @@ sub get_rpm_file_attributes {
 
   if ( exists( $attr->{config} ) ) {
     push @rpmattrs, '%config';
+  }else{ ## not a config file, may be a document
+  #######added by duanjigang for docfiles support in multipkg@2017-01-01--start 
+    if ( exists ($attr->{doc} )){
+        push @rpmattrs, '%doc';
+      }
   }
+  #######added by duanjigang for docfiles support in multipkg@2017-01-01--finish 
   if ( exists( $attr->{owner} ) || exists( $attr->{group} ) || exists( $attr->{perm} ) ) {
     my $mode  = ( exists( $attr->{perm} ) )  ? "$attr->{perm}" : '-';
     my $user  = ( exists( $attr->{owner} ) ) ? $attr->{owner}  : 'root';
