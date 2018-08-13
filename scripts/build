@@ -1,8 +1,8 @@
 #!/bin/sh
 
 
-[ -d settings ] ||  mkdir settings
-git log | grep commit | wc -l > settings/gitcount
+[ -d vars ] ||  mkdir vars
+git log | grep commit | wc -l > vars/gitcount
 
 if [ ! -x "$PERL" ]; then
     PERL=/usr/bin/perl
