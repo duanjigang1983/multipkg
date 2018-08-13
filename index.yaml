@@ -3,9 +3,9 @@ default:
     version: '1.2'
     summary: "Automation for package builds (supports RPM, deb)"
     noarch: false
-    group: "tops"
+    group: "public"
     license: "Apache2"
-    packager: "jj"
+    packager: "nobody"
     description: |
       Just multipkg
     provides:

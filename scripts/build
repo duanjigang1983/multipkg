@@ -1,5 +1,9 @@
 #!/bin/sh
 
+
+[ -d settings ] ||  mkdir settings
+git log | grep commit | wc -l > settings/gitcount
+
 if [ ! -x "$PERL" ]; then
     PERL=/usr/bin/perl
 fi
