@@ -20,6 +20,8 @@ default:
 distribution:
   centos7.x86_64:
     release: '6.centos7'
+  centos7.x86_64:
+    release: '6.centos6'
   ubuntu16.amd64:
     release: '6ubuntu16'
   debian8.amd64:
