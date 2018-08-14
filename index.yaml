@@ -19,8 +19,8 @@ default:
       - perl-Error
 distribution:
   centos7.x86_64:
-    release: '1.centos7'
+    release: '2.centos7'
   ubuntu16.amd64:
-    release: '1ubuntu16'
+    release: '2ubuntu16'
   debian8.amd64:
-    release: '1debian8'
+    release: '2debian8'
