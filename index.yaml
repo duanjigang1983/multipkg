@@ -25,4 +25,4 @@ distribution:
   ubuntu16.amd64:
     release: '6ubuntu16'
   debian8.amd64:
-    release: '6debian8'
+    release: '7debian8'
